@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-// Configurar el transporte de correo
+//Configurar el transporte de correo
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -12,30 +12,28 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 
-  //autorizar aceder a google
+  //autorizar acceder a google
   tls: {
     rejectUnauthorized: false,
   },
 });
 
-const prueba = async () => {
-  try {
-    await transporter.verify().then(() => {
-      console.log("conecto");
-    });
-  } catch (error) {
-    console.error("Error al enviar el correo:", error);
-  }
-};
-
-const enviarCorreo = async (correoDestino, asunto, contenido) => {
+const enviarCorreo = async (
+  nombre,
+  apellido,
+  correoDestino,
+  asuntop,
+  contenido
+) => {
   try {
     // Configurar el correo
     let mailOptions = {
-      from: process.env.EMAIL_PASSWORD,
-      to: correoDestino,
-      subject: asunto,
-      text: contenido,
+      from: correoDestino,
+      to: "mirgeserrano@gmail.com",
+      subject: asuntop,
+      html: `<h1>${correoDestino}</h1>
+      <p>Hola soy ${nombre} ${apellido}, te estoy contactando por que: ${contenido}<p/>
+    `,
     };
 
     // Enviar el correo
@@ -45,8 +43,5 @@ const enviarCorreo = async (correoDestino, asunto, contenido) => {
     console.error("Error al enviar el correo:", error);
   }
 };
-// Función para enviar el correo
 
-// Llamar a la función enviarCorreo con los datos necesarios
-//enviarCorreo("mirgesrrano@gamil.com", "asuto 1", "holaa");
 module.exports = { enviarCorreo, prueba };
