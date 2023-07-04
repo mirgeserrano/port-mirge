@@ -44,4 +44,4 @@ const enviarCorreo = async (
   }
 };
 
-module.exports = { enviarCorreo, prueba };
+module.exports = { enviarCorreo };
