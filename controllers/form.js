@@ -5,7 +5,6 @@ const { enviarCorreo } = require("../helpers/estructura");
 const mailSend = async (req, res = response) => {
   const { nombre, correoDestino, asuntop, contenido } = req.body;
 
-  console.log(nombre, correoDestino, asuntop, contenido);
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {

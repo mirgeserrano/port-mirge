@@ -13,9 +13,9 @@ router.post(
   "/",
   [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
-    check("email", "El email es obligatorio").not(),
+    check("email", "El email es obligatorio").normalizeEmail().not().isEmpty(),
     check("asuntop", "El asunto es obligatorio").not().isEmpty(),
-    check("contenido", "Recuerda añadir el contenido")
+    check("contenido", "Recuerda añadir el contenido, min 10 carateres")
       .not()
       .isEmpty()
       .isLength({ min: 10 }),

@@ -18,13 +18,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const enviarCorreo = async (
-  nombre,
-  apellido,
-  correoDestino,
-  asuntop,
-  contenido
-) => {
+const enviarCorreo = async (nombre, correoDestino, asuntop, contenido) => {
   try {
     // Configurar el correo
     let mailOptions = {
@@ -32,7 +26,7 @@ const enviarCorreo = async (
       to: "mirgeserrano@gmail.com",
       subject: asuntop,
       html: `<h1>${correoDestino}</h1>
-      <p>Hola soy ${nombre} ${apellido}, te estoy contactando por que: ${contenido}<p/>
+      <p>Hola soy ${nombre}, te estoy contactando por que: ${contenido}<p/>
     `,
     };
 
