@@ -14,6 +14,9 @@ app.use(cors());
 //lectura y parseo del body
 app.use(express.json());
 
+//disctorio publico
+app.use(express.static("public"));
+
 //Ruta
 app.use("/api/form", require("./routes/form"));
 
