@@ -1,18 +1,26 @@
 const { response } = require("express");
+const { check, validationResult } = require("express-validator");
 const { enviarCorreo } = require("../helpers/estructura");
 
-const CorreoEnvido = async (req, res = response) => {
-  const { correoDestino, asunto, contenido } = req.body;
+const mailSend = async (req, res = response) => {
+  const { nombre, correoDestino, asuntop, contenido } = req.body;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      ok: false,
+      errors: errors.mapped(),
+    });
+  }
+
   try {
-    //prueba();
-    enviarCorreo(correoDestino, asunto, contenido);
-    //console.log("kjsdasj");
-    res.json({
+    enviarCorreo(nombre, correoDestino, asuntop, contenido);
+    res.status(200).json({
       ok: true,
     });
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
       ok: true,
       smg: "vuelva intentar",
@@ -20,5 +28,5 @@ const CorreoEnvido = async (req, res = response) => {
   }
 };
 module.exports = {
-  CorreoEnvido,
+  mailSend,
 };
